@@ -25,6 +25,30 @@ class userController {
         const companies = await company_model.find()
         res.status(200).json(companies)
     }
+    static put_company_details = async (req, res) => {
+        const { name, location } = req.body
+        const id = req.params.id
+        if (name && location) {
+            const iscompany = await company_model.findOne({ id })
+            if (iscompany) {
+                Object.assign(iscompany, req.body)
+                await iscompany.save()
+                res.status(200).json({
+                    msg:"Data updated successfully!"
+                })
+            }
+            else {
+                res.status(404).json({
+                    msg:"No record found!"
+                })
+            }
+        }
+        else {
+            res.status(404).json({
+                msg: "Please fill all the details!"
+            })
+        }
+    }
     static get_company_details_by_id = async (req, res) => {
         const id = req.params.id
         const companies = await company_model.findOne({ id })
