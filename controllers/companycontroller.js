@@ -23,9 +23,19 @@ class userController {
     }
     static get_company_details = async (req, res) => {
         const companies = await company_model.find()
-        console.log(companies);
+        res.status(200).json(companies)
     }
-    
+    static get_company_details_by_id = async (req, res) => {
+        const id = req.params.id
+        const companies = await company_model.findOne({ id })
+        if(companies)
+            res.status(200).json(companies)
+        else {
+            res.status(404).json({
+                msg:"No record found!"
+            })
+        }
+    }
 }
 
 module.exports = userController

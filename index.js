@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const mongoose = require('mongoose')
-const companyroutes = require('./routes/comapany_routes')
+const companyroutes = require('./routes/company_routes')
 app.use(cors())
 app.use(express.json())
 
